@@ -1,0 +1,6 @@
+# created by virtualenv automatically
+.DS_Store
+*.pyc
+*.log
+.idea/*
+.pytest_cach
