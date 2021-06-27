@@ -5,3 +5,5 @@
 .idea/*
 .pytest_cach
 venv
+students_db/local_settings.py
+db.sqlite3
