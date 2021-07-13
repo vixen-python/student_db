@@ -16,15 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from student.views import hello, hello_user, hello_user_msg, hello_json, hello_view, students_view, student_info_by_id
+from student.views import student_info_by_id, StudentsListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', students_view, name='index'),
-    path('hello/', hello),
-    path('hello/<int:user_id>', hello_user),
-    path('hello/<int:user_id>/<str:msg>', hello_user_msg),
-    path('hello/json/<int:user_id>', hello_json),
-    path('hello_view/', hello_view, name='hello_view'),
+    path('', StudentsListView.as_view(), name='index'),
     path('student/info/<int:requested_id>', student_info_by_id, name='student_card')
 ]

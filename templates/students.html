@@ -5,7 +5,7 @@
 {% block content %}
     <h1>Welcome to Students DB</h1>
     <ul>
-        {% for student in students %}
+        {% for student in object_list %}
             <li>
                 {{ student.fullname|capfirst }} - {{ student.sex|sex_enum }}
             </li>
