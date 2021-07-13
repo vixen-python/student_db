@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load student_tags %}
+
+{% block content %}
+    {% if student %}
+        <h1>Basic info about student with id {{ student.id }}</h1>
+        <ul>
+            <li>First name: {{ student.first_name|capfirst }}</li>
+            <li>Last name: {{ student.last_name|capfirst }}</li>
+            <li>Date of birth: {{ student.date_of_birth }}</li>
+            <li>E-mail: {{ student.email }}</li>
+            <li>Sex: {{ student.sex|sex_enum }}</li>
+        </ul>
+    {% else %}
+        <h1>Basic info about student - <b>unknown student</b></h1>
+    {% endif %}
+{% endblock %}

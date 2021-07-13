@@ -1,0 +1,32 @@
+[
+{
+  "model": "student.address",
+  "pk": 1,
+  "fields": {
+    "street": "Andel",
+    "house_number": "1",
+    "zip_code": "15000",
+    "country_iso3": "CZE"
+  }
+},
+{
+  "model": "student.address",
+  "pk": 2,
+  "fields": {
+    "street": "Vaclavske namesti",
+    "house_number": "1",
+    "zip_code": "11000",
+    "country_iso3": "CZE"
+  }
+},
+{
+  "model": "student.address",
+  "pk": 3,
+  "fields": {
+    "street": "Dejvice",
+    "house_number": "1",
+    "zip_code": "16000",
+    "country_iso3": "CZE"
+  }
+}
+]

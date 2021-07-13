@@ -1,0 +1,34 @@
+[
+{
+  "model": "student.employment",
+  "pk": 1,
+  "fields": {
+    "employer": 2,
+    "position": "Presenter"
+  }
+},
+{
+  "model": "student.employment",
+  "pk": 2,
+  "fields": {
+    "employer": 1,
+    "position": "Developer"
+  }
+},
+{
+  "model": "student.employment",
+  "pk": 3,
+  "fields": {
+    "employer": 3,
+    "position": "Professor"
+  }
+},
+{
+  "model": "student.employment",
+  "pk": 4,
+  "fields": {
+    "employer": 3,
+    "position": "Junior lector"
+  }
+}
+]

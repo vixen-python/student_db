@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load student_tags %}
+
+{% block content %}
+    <h1>Welcome to Students DB</h1>
+    <ul>
+        {% for student in students %}
+            <li>
+                {{ student.fullname|capfirst }} - {{ student.sex|sex_enum }}
+            </li>
+        {% endfor %}
+    </ul>
+    {% comment %}
+    <p>Test comment block</p>
+    {% endcomment %}
+
+{% endblock %}
