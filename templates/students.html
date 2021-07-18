@@ -7,7 +7,8 @@
     <ul>
         {% for student in object_list %}
             <li>
-                {{ student.fullname|capfirst }} - {{ student.sex|sex_enum }}
+                <a href='{% url "student_card" student.id %}'>{{ student.fullname|capfirst }} </a>
+                - {{ student.sex|sex_enum }}
             </li>
         {% endfor %}
     </ul>

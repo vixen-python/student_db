@@ -6,13 +6,29 @@
     {% if student %}
         <h1>Basic info about student with id {{ student.id }}</h1>
         <ul>
-            <li>First name: {{ student.first_name|capfirst }}</li>
-            <li>Last name: {{ student.last_name|capfirst }}</li>
-            <li>Date of birth: {{ student.date_of_birth }}</li>
-            <li>E-mail: {{ student.email }}</li>
-            <li>Sex: {{ student.sex|sex_enum }}</li>
+            <li><b>First name:</b> {{ student.first_name|capfirst }}</li>
+            <li><b>Last name:</b> {{ student.last_name|capfirst }}</li>
+            <li><b>Date of birth:</b> {{ student.date_of_birth|date:"SHORT_DATE_FORMAT" }}</li>
+            <li><b>E-mail:</b> {{ student.email }}</li>
+            <li><b>Sex:</b> {{ student.sex|sex_enum }}</li>
+            <li><b>Permanent address:</b> {{ student.permanent_address.full_address }}</li>
+            <li><b>Employment:</b> {{ student.employment.full_name }}</li>
+                    {% if student.contacts.all %}
+                <li><b>Contacts:</b>
+                    <ul>
+                        {% for contact in student.contacts.all %}
+                            <li>
+                                <b>{{ contact.id }}</b>: <a href="{% url 'contact_card' contact.id %}">{{ contact.render_for_gui }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endif %}
         </ul>
+        <a class="btn btn-primary btn-warning" href="{% url 'student_update' student.id %}">Edit student</a>
+        <a class="btn btn-primary btn-danger" href="{% url 'student_delete' student.id %}">Delete student</a>
     {% else %}
         <h1>Basic info about student - <b>unknown student</b></h1>
     {% endif %}
+
 {% endblock %}

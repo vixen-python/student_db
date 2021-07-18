@@ -29,10 +29,38 @@
         >
             <span class="navbar-toggler-icon"></span>
         </button>
+        <a class="navbar-brand" href="{% url 'employer' %}">Employers list</a>
+        <button
+                class="navbar-toggler" type="button"
+                data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="{% url 'index' %}">
                     Home
+                </a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="{% url 'student_create' %}">
+                    Create student
+                </a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="{% url 'contact_create' %}">
+                    Create student contact
+                </a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="{% url 'address_create' %}">
+                    Create address
+                </a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="{% url 'employer_create' %}">
+                    Create employer
                 </a>
             </div>
         </div>
