@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if student %}
+        <h1>Address of student {{ student.fullname|capfirst }} with id {{ student.id }}</h1>
+        <ul>
+            <li>Street: {{ student.permanent_address.street }}</li>
+            <li>House number: {{ student.permanent_address.house_number }}</li>
+            <li>City: {{ student.permanent_address.city }}</li>
+            <li>Zip code: {{ student.permanent_address.zip_code }}</li>
+            <li>Country: {{ student.permanent_address.country_iso3 }}</li>
+        </ul>
+    {% else %}
+        <h1>Basic info about student - <b>unknown student</b></h1>
+    {% endif %}
+{% endblock %}

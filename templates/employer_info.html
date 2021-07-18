@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if employer %}
+
+        <h1>Employer {{ employer.id }} {{ employer.name|capfirst }} </h1>
+        <ul>
+                <li><b>Employer name:</b> {{ employer.name|capfirst }}</li>
+                <li><b>Employer address:</b> {{ employer.address.full_address }}</li>
+        </ul>
+        <a class="btn btn-primary btn-danger" href="{% url 'employer_delete' employer.id %}">Delete employer</a>
+    {% else %}
+        <h1>Employer details <b>Unknown employer</b></h1>
+{% endif %}
+{% endblock %}

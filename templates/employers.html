@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load student_tags %}
+
+{% block content %}
+    <h1>List of employers</h1>
+    <ul>
+        {% for employer in object_list %}
+            <li>
+                <a href='{% url "employer_card" employer.id %}'>{{ employer.name|capfirst }} </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if contact %}
+
+        <h1>Contact {{ contact.id }} on student {{ contact.student.fullname|capfirst }} </h1>
+        <ul>
+            {% if contact.personal_phone %}
+                <li><b>Personal phone:</b> {{ contact.personal_phone }}</li> {% endif %}
+            {% if contact.work_phone %}
+                <li><b>Work phone:</b> {{ contact.work_phone }}</li> {% endif %}
+            {% if contact.email %}
+                <li><b>E-mail:</b> {{ contact.email }}</li> {% endif %}
+        </ul>
+        <a class="btn btn-primary btn-warning" href="{% url 'contact_update' contact.id %}">Edit contact</a>
+    {% else %}
+        <h1>Contact details <b>Unknown contact</b></h1>
+{% endif %}
+{% endblock %}
