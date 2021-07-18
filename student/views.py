@@ -5,12 +5,16 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from student.models import Student, Contact, Employer
 from student.forms import StudentForm, ContactForm, AddressForm, EmployerForm
 
 
 # Create your views here.
+class IndexView(TemplateView):
+    template_name = "index.html"
+
+
 class LoginUserView(View):
     def post(self, request):
         output = {"message": ""}
@@ -40,7 +44,7 @@ class StudentsView(ListView):
 class StudentCreateView(CreateView):
     template_name = 'form.html'
     form_class = StudentForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('student:student_list')
 """
     def form_valid(self, form):
         result = super().form_valid(form)
@@ -61,32 +65,32 @@ class StudentUpdateView(UpdateView):
     template_name = "form.html"
     model = Student
     form_class = StudentForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('student:student_list')
 
 
 class StudentDeleteView(DeleteView):
     template_name = "student_confirm_delete.html"
     model = Student
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('student:student_list')
 
 
 class ContactCreateView(CreateView):
     template_name = 'form.html'
     form_class = ContactForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('student:student_list')
 
 
 class ContactUpdateView(UpdateView):
     template_name = "form.html"
     model = Contact
     form_class = ContactForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('student:student_list')
 
 
 class AddressCreateView(CreateView):
     template_name = 'form.html'
     form_class = AddressForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('student:student_list')
 
 
 class EmployerView(ListView):
@@ -97,7 +101,7 @@ class EmployerView(ListView):
 class EmployerCreateView(CreateView):
     template_name = "form.html"
     form_class = EmployerForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('employer')
 
 
 class EmployerDeleteView(DeleteView):

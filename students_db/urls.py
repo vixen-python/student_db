@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import student.urls
-from student.views import StudentsView, AddressCreateView, EmployerCreateView,  \
-    EmployerView, employer_info_by_id, EmployerDeleteView, LoginUserView
+from student.views import AddressCreateView, EmployerCreateView, \
+    EmployerView, employer_info_by_id, EmployerDeleteView, LoginUserView, IndexView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('student/', include(student.urls, namespace='student')),
-    path('', StudentsView.as_view(), name='index'),
+    path('', IndexView.as_view(), name='index'),
     path('employer/', EmployerView.as_view(), name='employer'),
     path('employer/<int:requested_id>', employer_info_by_id, name='employer_card'),
     path('address/create/', AddressCreateView.as_view(), name='address_create'),
