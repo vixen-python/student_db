@@ -1,6 +1,8 @@
 import json
 
 from django.contrib.auth import authenticate
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -36,12 +38,12 @@ class LoginUserView(View):
         return JsonResponse(output)
 
 
-class StudentsView(ListView):
+class StudentsView(LoginRequiredMixin, ListView):
     template_name = 'students.html'
     model = Student
 
 
-class StudentCreateView(CreateView):
+class StudentCreateView(LoginRequiredMixin, CreateView):
     template_name = 'form.html'
     form_class = StudentForm
     success_url = reverse_lazy('student:student_list')
@@ -61,55 +63,56 @@ class StudentCreateView(CreateView):
 """
 
 
-class StudentUpdateView(UpdateView):
+class StudentUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "form.html"
     model = Student
     form_class = StudentForm
     success_url = reverse_lazy('student:student_list')
 
 
-class StudentDeleteView(DeleteView):
+class StudentDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "student_confirm_delete.html"
     model = Student
     success_url = reverse_lazy('student:student_list')
 
 
-class ContactCreateView(CreateView):
+class ContactCreateView(LoginRequiredMixin, CreateView):
     template_name = 'form.html'
     form_class = ContactForm
     success_url = reverse_lazy('student:student_list')
 
 
-class ContactUpdateView(UpdateView):
+class ContactUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "form.html"
     model = Contact
     form_class = ContactForm
     success_url = reverse_lazy('student:student_list')
 
 
-class AddressCreateView(CreateView):
+class AddressCreateView(LoginRequiredMixin, CreateView):
     template_name = 'form.html'
     form_class = AddressForm
     success_url = reverse_lazy('student:student_list')
 
 
-class EmployerView(ListView):
+class EmployerView(LoginRequiredMixin, ListView):
     template_name = 'employers.html'
     model = Employer
 
 
-class EmployerCreateView(CreateView):
+class EmployerCreateView(LoginRequiredMixin, CreateView):
     template_name = "form.html"
     form_class = EmployerForm
     success_url = reverse_lazy('employer')
 
 
-class EmployerDeleteView(DeleteView):
+class EmployerDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "employer_confirm_delete.html"
     model = Employer
     success_url = reverse_lazy('employer')
 
 
+@login_required
 def student_info_by_id(request, requested_id):
     return render(
         request,
@@ -118,6 +121,7 @@ def student_info_by_id(request, requested_id):
     )
 
 
+@login_required
 def contact_info_by_id(request, requested_id):
     return render(
         request,
@@ -126,6 +130,7 @@ def contact_info_by_id(request, requested_id):
     )
 
 
+@login_required
 def address_info_by_id(request, requested_id):
     return render(
         request,
@@ -134,6 +139,7 @@ def address_info_by_id(request, requested_id):
     )
 
 
+@login_required
 def employer_info_by_id(request, requested_id):
     return render(
         request,
