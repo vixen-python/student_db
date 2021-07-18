@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.core.exceptions import ValidationError
-from django.forms import Form, CharField, ChoiceField, EmailField, DateField, ModelChoiceField, ModelForm
+from django.forms import CharField, ChoiceField, EmailField, DateField, ModelChoiceField, ModelForm
 from student.choices import SEX_TYPES
 from student.models import Employment, Student, Employer, Address, Contact
 
@@ -100,7 +100,11 @@ class ContactForm(ModelForm):
         return result
 
 
-class AddressForm(Form):
+class AddressForm(ModelForm):
+    class Meta:
+        model = Address
+        fields = '__all__'
+
     street = CharField(min_length=3, max_length=128, required=True)
     house_number = CharField(max_length=16, required=True, validators=[is_number])
     city = CharField(max_length=64, required=True)

@@ -12,7 +12,7 @@
             {% if contact.email %}
                 <li><b>E-mail:</b> {{ contact.email }}</li> {% endif %}
         </ul>
-        <a class="btn btn-primary btn-warning" href="{% url 'contact_update' contact.id %}">Edit contact</a>
+        <a class="btn btn-primary btn-warning" href="{% url 'student:contact_update' contact.id %}">Edit contact</a>
     {% else %}
         <h1>Contact details <b>Unknown contact</b></h1>
 {% endif %}

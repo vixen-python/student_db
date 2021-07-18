@@ -18,15 +18,15 @@
                     <ul>
                         {% for contact in student.contacts.all %}
                             <li>
-                                <b>{{ contact.id }}</b>: <a href="{% url 'contact_card' contact.id %}">{{ contact.render_for_gui }}</a>
+                                <b>{{ contact.id }}</b>: <a href="{% url 'student:contact_card' contact.id %}">{{ contact.render_for_gui }}</a>
                             </li>
                         {% endfor %}
                     </ul>
                 </li>
             {% endif %}
         </ul>
-        <a class="btn btn-primary btn-warning" href="{% url 'student_update' student.id %}">Edit student</a>
-        <a class="btn btn-primary btn-danger" href="{% url 'student_delete' student.id %}">Delete student</a>
+        <a class="btn btn-primary btn-warning" href="{% url 'student:student_update' student.id %}">Edit student</a>
+        <a class="btn btn-primary btn-danger" href="{% url 'student:student_delete' student.id %}">Delete student</a>
     {% else %}
         <h1>Basic info about student - <b>unknown student</b></h1>
     {% endif %}

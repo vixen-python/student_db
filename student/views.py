@@ -1,22 +1,47 @@
+import json
+
+from django.contrib.auth import authenticate
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, FormView, CreateView, UpdateView, DeleteView
-from student.models import Student, Contact, Address, Employer
+from django.views import View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from student.models import Student, Contact, Employer
 from student.forms import StudentForm, ContactForm, AddressForm, EmployerForm
 
 
 # Create your views here.
+class LoginUserView(View):
+    def post(self, request):
+        output = {"message": ""}
+        msg_success = 'You are logged in'
+        msg_fail = 'I do not know you'
+
+        request_json = json.loads(request.body)
+        username = request_json.get('username', '').lower().strip()
+        password = request_json.get('password')
+
+        if username and password:
+            if authenticate(username=username, password=password):
+                output['message'] = msg_success
+            else:
+                output['message'] = msg_fail
+        else:
+            output['message'] = msg_fail
+
+        return JsonResponse(output)
+
 
 class StudentsView(ListView):
     template_name = 'students.html'
     model = Student
 
 
-class StudentCreateView(FormView):
+class StudentCreateView(CreateView):
     template_name = 'form.html'
     form_class = StudentForm
     success_url = reverse_lazy('index')
-
+"""
     def form_valid(self, form):
         result = super().form_valid(form)
         Student.objects.create(
@@ -29,6 +54,7 @@ class StudentCreateView(FormView):
             email=form.cleaned_data['email']
         )
         return result
+"""
 
 
 class StudentUpdateView(UpdateView):
@@ -57,21 +83,10 @@ class ContactUpdateView(UpdateView):
     success_url = reverse_lazy('index')
 
 
-class AddressCreateView(FormView):
+class AddressCreateView(CreateView):
     template_name = 'form.html'
     form_class = AddressForm
     success_url = reverse_lazy('index')
-
-    def form_valid(self, form):
-        result = super().form_valid(form)
-        Address.objects.create(
-            street=form.cleaned_data['street'],
-            house_number=form.cleaned_data['house_number'],
-            city=form.cleaned_data['city'],
-            zip_code=form.cleaned_data['zip_code'],
-            country_iso3=form.cleaned_data['country_iso3']
-        )
-        return result
 
 
 class EmployerView(ListView):
