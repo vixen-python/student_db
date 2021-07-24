@@ -1,8 +1,8 @@
 import json
 
 from django.contrib.auth import authenticate
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -13,6 +13,9 @@ from student.forms import StudentForm, ContactForm, AddressForm, EmployerForm
 
 
 # Create your views here.
+from student.utils.permissions import FacultyWorkerRequired
+
+
 class IndexView(TemplateView):
     template_name = "index.html"
 
@@ -89,15 +92,17 @@ class ContactUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('student:student_list')
 
 
-class AddressCreateView(LoginRequiredMixin, CreateView):
+class AddressCreateView(PermissionRequiredMixin, LoginRequiredMixin, CreateView):
     template_name = 'form.html'
     form_class = AddressForm
     success_url = reverse_lazy('student:student_list')
+    permission_required = 'student.add_address'
 
 
-class EmployerView(LoginRequiredMixin, ListView):
+class EmployerView(PermissionRequiredMixin, LoginRequiredMixin, FacultyWorkerRequired, ListView):
     template_name = 'employers.html'
     model = Employer
+    permission_required = 'student.view_employer'
 
 
 class EmployerCreateView(LoginRequiredMixin, CreateView):
@@ -113,6 +118,7 @@ class EmployerDeleteView(LoginRequiredMixin, DeleteView):
 
 
 @login_required
+@permission_required('student.view_student', raise_exception=True)
 def student_info_by_id(request, requested_id):
     return render(
         request,

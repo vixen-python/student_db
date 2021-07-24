@@ -73,14 +73,18 @@
                             Employer
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            {% if 'student.view_employer' in perms %}
                             <a class="dropdown-item" type="button"
                                href="{% url 'employer' %}">
                                 List employers
                             </a>
+                            {% endif %}
+                            {% if 'student.add_employer' in perms %}
                             <a class="dropdown-item"
                                href="{% url 'employer_create' %}">
                                 Create Employer
                             </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
